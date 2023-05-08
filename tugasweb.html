@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>reset tugas api siti haya humairoh</title>
+  </head>
+  <body>
+    <h1>Daftar Negara di Dunia</h1>
+    <table style="border-collapse: collapse; border: 1px solid black;">
+      <thead>
+        <tr>
+          <th style="border: 1px solid black;">Nama</th>
+          <th style="border: 1px solid black;">Bendera</th>
+        </tr>
+      </thead>
+      <tbody id="countries-list"></tbody>
+    </table>
+
+    <script>
+      const url = "https://restcountries.com/v2/all";
+
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          const countriesList = document.getElementById("countries-list");
+
+          data.forEach(country => {
+            const tr = document.createElement("tr");
+            const name = document.createElement("td");
+            const flagCell = document.createElement("td");
+            const flag = document.createElement("img");
+
+            name.textContent = country.name;
+            flag.src = country.flag;
+            flag.width = 40;
+            flag.height = 40;
+
+            flagCell.appendChild(flag);
+            tr.appendChild(name);
+            tr.appendChild(flagCell);
+            countriesList.appendChild(tr);
+          });
+        })
+        .catch(error => console.log(error));
+    </script>
+  </body>
+</html>
